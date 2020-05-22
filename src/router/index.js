@@ -3,14 +3,21 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const Login = () => import('@/views/Login.vue')
+const Login = () => import('@/views/login.vue')
+const Layout = () => import('@/layout/index.js')
 const Error404 = () => import('@/views/errorPage/404.vue')
 const userList = () => import('@/views/userList/userList.vue')
 
 const constantRouterMap = [
     {
         path: '/',
+        component: Layout,
         redirect: '/index/index'
+    },
+    {
+        path: '/index/index',
+        name: 'index',
+        component: Layout
     },
     {
         path: '/login',
@@ -23,9 +30,9 @@ const constantRouterMap = [
         hidden: true
     }
 ]
-
+console.log('index.js')
 const router = new VueRouter({
-    constantRouterMap
+    routes: constantRouterMap
 })
 
 export const asyncRouterMap = [

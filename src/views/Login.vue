@@ -14,7 +14,7 @@
                 <el-form-item label="密码" prop="password">
                     <el-input v-model="userInfo.password"></el-input>
                 </el-form-item>
-                <el-button type="primary" @click="submitForm('loginRef')">登录1</el-button>
+                <el-button type="primary" @click="submitForm('loginRef')">登录</el-button>
             </el-form>
         </div>
     </div>
