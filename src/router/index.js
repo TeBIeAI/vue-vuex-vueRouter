@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const Login = () => import('@/views/login.vue')
+const Login = () => import('@/views/Login.vue')
 const Layout = () => import('@/layout/index.js')
 const Error404 = () => import('@/views/errorPage/404.vue')
 const userList = () => import('@/views/userList/userList.vue')
