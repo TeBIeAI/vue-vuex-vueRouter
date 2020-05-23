@@ -1,45 +1,51 @@
 <template>
     <div>
-        <div class="left_menu">
-            <el-menu default-active="1-4-1" class="el-menu-vertical-demo">
-                <el-submenu index="1">
-                    <template slot="title">
-                        <i class="el-icon-location"></i>
-                        <span slot="title">导航一</span>
-                    </template>
-                    <el-menu-item-group>
-                        <span slot="title">分组一</span>
-                        <el-menu-item index="1-1">选项1</el-menu-item>
-                        <el-menu-item index="1-2">选项2</el-menu-item>
-                    </el-menu-item-group>
-                    <el-menu-item-group title="分组2">
-                        <el-menu-item index="1-3">选项3</el-menu-item>
-                    </el-menu-item-group>
-                    <el-submenu index="1-4">
-                        <span slot="title">选项4</span>
-                        <el-menu-item index="1-4-1">选项1</el-menu-item>
+        <div>
+            <el-menu unique-opened default-active="2" class="el-menu-vertical-demo">
+                <!-- 一级菜单 -->
+                <template v-for="(item, index) in permission_router">
+                    <router-link
+                        v-if="item.meta && item.noDropdown"
+                        :to="item.path + '/' + item.children[0].path"
+                        :key="index"
+                    >
+                        <el-menu-item :index="index.toString()">
+                            <i class="el-icon-setting"></i>
+                            <span slot="title">{{ item.meta.title }}</span>
+                        </el-menu-item>
+                    </router-link>
+
+                    <!-- 二级菜单 -->
+                    <el-submenu
+                        :index="item.path.toString()"
+                        v-if="item.meta && item.children && !item.noDropdown && item.children.length > 0"
+                        :key="index"
+                    >
+                        <template slot="title">{{item.meta.title}}</template>
+                        <router-link
+                            v-for="(itemC, indexC) in item.children"
+                            :to="item.path+'/'+item.children[0].path"
+                            :key="indexC"
+                        >
+                            <el-menu-item
+                                v-if="itemC.meta && itemC.meta.title"
+                                :index="index.toString()+indexC"
+                            >{{itemC.meta.title}}</el-menu-item>
+                        </router-link>
                     </el-submenu>
-                </el-submenu>
-                <el-menu-item index="2">
-                    <i class="el-icon-menu"></i>
-                    <span slot="title">导航二</span>
-                </el-menu-item>
-                <el-menu-item index="3" disabled>
-                    <i class="el-icon-document"></i>
-                    <span slot="title">导航三</span>
-                </el-menu-item>
-                <el-menu-item index="4">
-                    <i class="el-icon-setting"></i>
-                    <span slot="title">导航四</span>
-                </el-menu-item>
+                </template>
             </el-menu>
         </div>
     </div>
 </template>
 
 <script>
-export default {}
+import { mapGetters } from 'vuex'
+export default {
+    computed: {
+        ...mapGetters(['permission_router'])
+    }
+}
 </script>
 
-<style lang='less'>
-</style>
+<style lang="less"></style>

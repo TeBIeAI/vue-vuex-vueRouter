@@ -26,6 +26,7 @@ router.beforeEach((to, from, next) => {
                 try {
                     getUserInfo({ token: hasToken })
                         .then(res => {
+                            console.log(router)
                             let userList = res.userList
                             store.commit('SET_NAME', userList.name)
                             store.commit('SET_ROLES', userList.roles)
