@@ -1,44 +1,34 @@
 <template>
-    <el-container class="container_home">
-        <el-header>Header</el-header>
-        <el-container>
-            <el-aside width="200px">Aside</el-aside>
-            <el-container>
-                <el-main>Main</el-main>
-                <el-footer>Footer</el-footer>
-            </el-container>
-        </el-container>
-    </el-container>
+    <div class="container_home">
+        <!-- 左侧菜单 -->
+        <Aside class="container_left"></Aside>
+        <!-- 右侧主题 -->
+        <div class="container_right">
+            <!-- 头部 -->
+            <Header></Header>
+            <!-- 主体内容 -->
+            <router-view></router-view>
+            <!-- footer -->
+            <Footer></Footer>
+        </div>
+    </div>
 </template>
 
 <script>
-export default {}
+import Header from './header'
+import Main from './main'
+import Aside from './aside'
+import Footer from './footer'
+
+export default {
+    components: {
+        Header,
+        Main,
+        Aside,
+        Footer
+    }
+}
 </script>
 
 <style lang="less" scoped>
-.container_home {
-    height: 100%;
-    .el-header,
-    .el-footer {
-        background-color: #b3c0d1;
-        color: #333;
-        text-align: center;
-        line-height: 60px;
-    }
-
-    .el-aside {
-        background-color: #d3dce6;
-        color: #333;
-        text-align: center;
-        line-height: 200px;
-    }
-
-    .el-main {
-        background-color: #e9eef3;
-        color: #333;
-        text-align: center;
-        line-height: 160px;
-        height: 100%;
-    }
-}
 </style>
