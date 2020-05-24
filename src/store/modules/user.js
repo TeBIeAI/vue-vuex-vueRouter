@@ -2,7 +2,8 @@
  * 用户相关数据管理
  */
 
-import { getToken } from '@/utils/auth'
+import { getToken, removeToken } from '@/utils/auth'
+import { logout } from '@/api/user'
 
 const user = {
     state: {
@@ -25,6 +26,18 @@ const user = {
         token: state => state.token,
         roles: state => state.roles,
         name: state => state.name
+    },
+    actions: {
+        loginOut({ commit, reqData }) {
+            return new Promise((resolve, reject) => {
+                logout(reqData).then(res => {
+                    removeToken('token')
+                    commit('SET_NAME', '')
+                    commit('SET_ROLES', '')
+                    resolve()
+                })
+            })
+        }
     }
 }
 

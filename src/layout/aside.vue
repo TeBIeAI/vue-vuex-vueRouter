@@ -1,7 +1,19 @@
 <template>
     <div>
         <div>
-            <el-menu unique-opened default-active="2" class="el-menu-vertical-demo">
+            <div class="auth_name">
+                <img
+                    :src="userImg"
+                    style="border-radius: 50%; width:40px; height: 40px; marginRight:10px;"
+                />
+                <span class="names">TeBIeAI</span>
+            </div>
+            <el-menu
+                style="width:180px;"
+                unique-opened
+                default-active="2"
+                class="el-menu-vertical-demo"
+            >
                 <!-- 一级菜单 -->
                 <template v-for="(item, index) in permission_router">
                     <router-link
@@ -41,11 +53,30 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import userImg from '@/assets/img/avatar-3.png'
 export default {
     computed: {
         ...mapGetters(['permission_router'])
+    },
+    data () {
+        return {
+            userImg: userImg
+        }
     }
 }
 </script>
 
-<style lang="less"></style>
+<style lang="less">
+.auth_name {
+    padding-left: 20px;
+    height: 60px;
+    align-items: center;
+    border-bottom: 2px solid #f56c6c;
+    border-right: 1px solid #ebeef5;
+    display: flex;
+    .names {
+        color: #ff6c60;
+        font-size: 24px;
+    }
+}
+</style>

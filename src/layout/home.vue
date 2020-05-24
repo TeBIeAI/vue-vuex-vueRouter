@@ -6,6 +6,7 @@
         <div class="container_right">
             <!-- 头部 -->
             <Header></Header>
+            <Bread />
             <!-- 主体内容 -->
             <router-view></router-view>
             <!-- footer -->
@@ -19,13 +20,15 @@ import Header from './header'
 import Main from './main'
 import Aside from './aside'
 import Footer from './footer'
+import Bread from './bread'
 
 export default {
     components: {
         Header,
         Main,
         Aside,
-        Footer
+        Footer,
+        Bread
     }
 }
 </script>

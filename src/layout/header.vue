@@ -1,10 +1,52 @@
 <template>
-    <div class="content_top">Header</div>
+    <div class="content_top">
+        <el-row>
+            <el-col :span="18">
+                <div class="grid-content bg-purple">1</div>
+            </el-col>
+            <el-col :span="6">
+                <div class="grid-content bg-purple-light">
+                    <!-- 右侧登出 -->
+                    <el-menu class="el-menu-demo" mode="horizontal">
+                        <el-submenu index="2">
+                            <template slot="title">hi：{{name}}</template>
+                            <el-menu-item index="2-1">infoShow</el-menu-item>
+                            <el-menu-item index="2-2">infoMidy</el-menu-item>
+                            <el-menu-item @click="selectHandle('loginOut')" index="2-3">login Out</el-menu-item>
+                        </el-submenu>
+                    </el-menu>
+                </div>
+            </el-col>
+        </el-row>
+    </div>
 </template>
 
 <script>
-export default {}
+import { mapGetters, mapActions } from 'vuex'
+export default {
+    computed: {
+        ...mapGetters(['name'])
+    },
+    methods: {
+        ...mapActions(['loginOut']),
+        logOut () {
+            this.loginOut().then(res => {
+                window.location.reload()
+            })
+        },
+        selectHandle (handleType) {
+            switch (handleType) {
+                case 'loginOut':
+                    this.logOut()
+            }
+
+        }
+    }
+}
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
+.grid-content.bg-purple-light {
+    text-align: right;
+}
 </style>

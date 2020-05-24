@@ -12,4 +12,6 @@ export default {
 
 <style lang="less">
 @import './style/global.less';
+@import './style/elementUI.less';
+@import './style/scrollBar.less';
 </style>
