@@ -98,7 +98,7 @@ export default {
         userHobby,
         userList
     },
-    data() {
+    data () {
         return {
             DevelopmentLog: DevelopmentLog
         }

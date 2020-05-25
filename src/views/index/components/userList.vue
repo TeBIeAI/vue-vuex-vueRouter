@@ -26,19 +26,19 @@ import { getSalesTableList } from '@/api/user'
 import userImg from '@/assets/img/avatar-3.png'
 
 export default {
-    data() {
+    data () {
         return {
             tableData: [],
             userImg: userImg
         }
     },
-    mounted() {
+    mounted () {
         this.initTable()
     },
     methods: {
-        initTable() {
+        initTable () {
             getSalesTableList({}).then(res => {
-                console.log(res)
+                console.log(res.data.list)
                 this.tableData = res.data.list
             })
         }

@@ -42,5 +42,35 @@ export default {
                 list: pageList
             }
         }
+    },
+
+    getUserList: config => {
+        const { limit, page, name } = mUtils.param2Obj(config.url)
+        let mockList = List
+        if (name && name != '') {
+            mockList = mockList.filter(item => {
+                return item.username.indexOf(name) > -1 ? true : false
+            })
+        }
+        const userList = mockList.filter(
+            (item, index) => index < limit * page && index >= limit * (page - 1)
+        )
+        return {
+            code: 200,
+            data: {
+                total: mockList.length,
+                userList: userList
+            }
+        }
+    },
+
+    removeUser: config => {
+        const { id } = mUtils.param2Obj(config.url)
+        List = List.filter(item => {
+            return item.id !== id
+        })
+        return {
+            code: 200
+        }
     }
 }

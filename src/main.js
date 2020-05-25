@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import elementUI from 'element-ui'
+import Message from 'element-ui'
 import('element-ui/lib/theme-chalk/index.css')
 import '@/mock'
 import '@/permission.js'

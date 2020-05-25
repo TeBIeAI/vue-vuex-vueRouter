@@ -31,3 +31,19 @@ export function getSalesTableList(params) {
         params: params
     })
 }
+
+export function getUserList(params) {
+    return request({
+        url: '/user/list/get',
+        method: 'get',
+        params: params
+    })
+}
+
+export function removeUserByID(params) {
+    return request({
+        url: '/remove/user',
+        method: 'get',
+        params: params
+    })
+}
