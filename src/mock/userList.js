@@ -3,7 +3,7 @@ import Mock from 'mockjs'
 import * as mUtils from '@/utils/Util'
 
 let List = []
-const count = 7
+const count = 300
 
 for (let i = 0; i < count; i++) {
     List.push(
@@ -27,7 +27,7 @@ export default {
      * @return {{code: number, count: number, data: *[]}}
      */
     getSalesList: config => {
-        const { name, page = 1, limit = 7 } = mUtils.param2Obj(config.url)
+        const { name, page = 1, limit = 300 } = mUtils.param2Obj(config.url)
         const mockList = List.filter(user => {
             if (name && user.username.indexOf(name) === -1) return false
             return true

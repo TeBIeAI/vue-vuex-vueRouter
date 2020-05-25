@@ -76,7 +76,9 @@
                     <userHobby />
                 </el-col>
                 <el-col :span="12">
-                    <userList />
+                    <div class>
+                        <userList />
+                    </div>
                 </el-col>
             </el-row>
         </div>
@@ -96,7 +98,7 @@ export default {
         userHobby,
         userList
     },
-    data () {
+    data() {
         return {
             DevelopmentLog: DevelopmentLog
         }

@@ -1,6 +1,6 @@
 <template>
-    <el-card class="table_card">
-        <el-table :data="tableData" stripe style="width: 100%">
+    <el-card class="table_card el-scrollbar">
+        <el-table class :data="tableData" stripe style="width: 100%">
             <el-table-column
                 prop="username"
                 label="USERNAME"
@@ -22,24 +22,23 @@
 </template>
 
 <script>
-
 import { getSalesTableList } from '@/api/user'
-import userImg from "@/assets/img/avatar-3.png";
+import userImg from '@/assets/img/avatar-3.png'
 
 export default {
-    data () {
+    data() {
         return {
             tableData: [],
             userImg: userImg
         }
     },
-    mounted () {
+    mounted() {
         this.initTable()
     },
     methods: {
-        initTable () {
+        initTable() {
             getSalesTableList({}).then(res => {
-                console.log(res);
+                console.log(res)
                 this.tableData = res.data.list
             })
         }
@@ -50,6 +49,7 @@ export default {
 <style scope lang="less">
 .table_card {
     height: 362px;
+    overflow-y: scroll;
 }
 .userImg {
     width: 40px;
