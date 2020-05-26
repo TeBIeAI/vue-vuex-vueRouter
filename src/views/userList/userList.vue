@@ -11,6 +11,7 @@
                 </el-col>
                 <el-col :span="7">
                     <el-button type="success" @click="getUserData">搜索</el-button>
+                    <el-button type="success" @click="addUser">添加用户</el-button>
                 </el-col>
             </el-row>
         </el-card>
@@ -48,7 +49,7 @@
                 <el-table-column label="DATE" prop="date"></el-table-column>
                 <el-table-column label="操作" prop>
                     <template slot-scope="scope">
-                        <el-button @click="editUser(scope)" type="success" size="mini">编辑</el-button>
+                        <el-button @click="editUser(scope.row)" type="success" size="mini">编辑</el-button>
                         <el-button @click="removeUser(scope.row)" type="danger" size="mini">删除</el-button>
                     </template>
                 </el-table-column>
@@ -63,14 +64,23 @@
                 :total="pageTotal"
             ></el-pagination>
         </el-card>
+
+        <!-- 添加用户dialog -->
+        <AddUserDialog :userDatas="userData" :dialogVisible.sync="showAddUserDialog"></AddUserDialog>
     </div>
 </template>
 
 <script>
 import { getUserList, removeUserByID } from '@/api/user'
+import AddUserDialog from './components/addUserDialog'
 export default {
-    data () {
+    components: {
+        AddUserDialog
+    },
+    data() {
         return {
+            showAddUserDialog: false,
+            userData: null,
             tableData: [
                 {
                     id: '12987122',
@@ -118,11 +128,11 @@ export default {
             pageTotal: 0
         }
     },
-    mounted () {
+    mounted() {
         this.getUserData()
     },
     methods: {
-        getUserData () {
+        getUserData() {
             let page = Object.assign({}, this.pageInfo)
             getUserList(page).then(res => {
                 console.log(res)
@@ -130,18 +140,23 @@ export default {
                 this.tableData = res.data.userList
             })
         },
-        handleSizeChange (limit) {
-            this.pageInfo.limit = limit;
+        handleSizeChange(limit) {
+            this.pageInfo.limit = limit
             this.getUserData()
         },
-        handleCurrentChange (page) {
-            this.pageInfo.page = page;
+        handleCurrentChange(page) {
+            this.pageInfo.page = page
             this.getUserData()
         },
-        editUser (row) {
-            console.log(row);
+        editUser(row) {
+            console.log({ ...row })
+            this.showAddUserDialog = true
+            this.userData = { ...row }
         },
-        removeUser (row) {
+        addUser() {
+            this.showAddUserDialog = true
+        },
+        removeUser(row) {
             removeUserByID({ ...row }).then(res => {
                 this.$message.success('删除用户成功')
                 this.getUserData()
