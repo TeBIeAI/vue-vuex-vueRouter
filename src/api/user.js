@@ -1,6 +1,6 @@
 import request from '@/utils/axios'
 
-export function login(params) {
+export function login (params) {
     return request({
         url: '/user/login',
         methods: 'get',
@@ -8,7 +8,7 @@ export function login(params) {
     })
 }
 
-export function logout(params) {
+export function logout (params) {
     return request({
         url: '/user/loginOut',
         method: 'get',
@@ -16,7 +16,7 @@ export function logout(params) {
     })
 }
 
-export function getUserInfo(params) {
+export function getUserInfo (params) {
     return request({
         url: '/user/getUserInfo',
         methods: 'get',
@@ -24,7 +24,7 @@ export function getUserInfo(params) {
     })
 }
 
-export function getSalesTableList(params) {
+export function getSalesTableList (params) {
     return request({
         url: '/sales/get',
         method: 'get',
@@ -32,7 +32,7 @@ export function getSalesTableList(params) {
     })
 }
 
-export function getUserList(params) {
+export function getUserList (params) {
     return request({
         url: '/user/list/get',
         method: 'get',
@@ -40,9 +40,33 @@ export function getUserList(params) {
     })
 }
 
-export function removeUserByID(params) {
+export function removeUserByID (params) {
     return request({
         url: '/remove/user',
+        method: 'get',
+        params: params
+    })
+}
+
+/**
+ * 修改用户信息
+ * @param {} params 
+ */
+export function undateUserInfo (params) {
+    return request({
+        url: '/edit/userInofo',
+        method: 'get',
+        params: params
+    })
+}
+
+/**
+ * 添加用户信息
+ * @param {} params 
+ */
+export function createUser (params) {
+    return request({
+        url: '/add/user',
         method: 'get',
         params: params
     })

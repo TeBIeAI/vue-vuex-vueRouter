@@ -72,5 +72,48 @@ export default {
         return {
             code: 200
         }
-    }
+    },
+
+    // 修改用户信息
+    updataUserInfo: config => {
+        const { id, commentContent, date, price, status, userImg, username } = mUtils.param2Obj(config.url)
+        List.some(user => {
+            if (user.id === id) {
+                user.commentContent = commentContent
+                user.date = date
+                user.price = price
+                user.status = status
+                user.userImg = userImg
+                user.username = username
+                return true
+            }
+        })
+        return {
+            code: 200,
+            data: {
+                msg: '修改用户成功'
+            }
+        }
+    },
+    // 添加用户
+    createUser: config => {
+        const { id, commentContent, date, price, status, userImg, username } = mUtils.param2Obj(config.url)
+        List.unshift({
+            id: Mock.Random.guid(),
+            date: Mock.Random.now(),
+            commentContent: commentContent || '',
+            price: price || '',
+            status: status || '',
+            userImg: userImg || '',
+            username: username || ''
+        })
+        return {
+            code: 200,
+            data: {
+                msg: '修改用户成功'
+            }
+        }
+    },
+
+
 }

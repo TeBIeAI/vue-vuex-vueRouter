@@ -66,7 +66,12 @@
         </el-card>
 
         <!-- 添加用户dialog -->
-        <AddUserDialog :userDatas="userData" :dialogVisible.sync="showAddUserDialog"></AddUserDialog>
+        <AddUserDialog
+            :dialogTitle="dialogsTitle"
+            :userDatas="userData"
+            :dialogVisible.sync="showAddUserDialog"
+            :getUserLists="getUserData"
+        ></AddUserDialog>
     </div>
 </template>
 
@@ -81,6 +86,7 @@ export default {
         return {
             showAddUserDialog: false,
             userData: null,
+            dialogsTitle: '',
             tableData: [
                 {
                     id: '12987122',
@@ -150,10 +156,12 @@ export default {
         },
         editUser(row) {
             console.log({ ...row })
+            this.dialogsTitle = '编辑'
             this.showAddUserDialog = true
             this.userData = { ...row }
         },
         addUser() {
+            this.dialogsTitle = '添加用户'
             this.showAddUserDialog = true
         },
         removeUser(row) {
