@@ -1,3 +1,4 @@
 import Layout from './home.vue'
+import content from './content.vue'
 
-export default Layout
+export { Layout, content }

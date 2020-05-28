@@ -16,7 +16,15 @@
             </el-row>
         </el-card>
         <el-card>
-            <el-table :data="tableData" style="width: 100%" stripe>
+            <el-table
+                v-loading="loading"
+                element-loading-text="拼命加载中"
+                element-loading-spinner="el-icon-loading"
+                element-loading-background="rgba(0, 0, 0, 0.8)"
+                :data="tableData"
+                style="width: 100%"
+                stripe
+            >
                 <el-table-column type="expand">
                     <template slot-scope="props">
                         <el-form label-position="left" inline class="demo-table-expand">
@@ -45,7 +53,13 @@
                     </template>
                 </el-table-column>
                 <el-table-column label="USERNAME" prop="username"></el-table-column>
-                <el-table-column label="PRICE" prop="price"></el-table-column>
+                <el-table-column label="PRICE" prop="price">
+                    <template slot-scope="scope">
+                        <el-tag
+                            :type="scope.row.price > 1000 ? 'success' : 'danger'"
+                        >{{scope.row.price}}</el-tag>
+                    </template>
+                </el-table-column>
                 <el-table-column label="DATE" prop="date"></el-table-column>
                 <el-table-column label="操作" prop>
                     <template slot-scope="scope">
@@ -82,49 +96,13 @@ export default {
     components: {
         AddUserDialog
     },
-    data() {
+    data () {
         return {
+            loading: true,
             showAddUserDialog: false,
             userData: null,
             dialogsTitle: '',
-            tableData: [
-                {
-                    id: '12987122',
-                    name: '好滋好味鸡蛋仔',
-                    category: '江浙小吃、小吃零食',
-                    desc: '荷兰优质淡奶，奶香浓而不腻',
-                    address: '上海市普陀区真北路',
-                    shop: '王小虎夫妻店',
-                    shopId: '10333'
-                },
-                {
-                    id: '12987123',
-                    name: '好滋好味鸡蛋仔',
-                    category: '江浙小吃、小吃零食',
-                    desc: '荷兰优质淡奶，奶香浓而不腻',
-                    address: '上海市普陀区真北路',
-                    shop: '王小虎夫妻店',
-                    shopId: '10333'
-                },
-                {
-                    id: '12987125',
-                    name: '好滋好味鸡蛋仔',
-                    category: '江浙小吃、小吃零食',
-                    desc: '荷兰优质淡奶，奶香浓而不腻',
-                    address: '上海市普陀区真北路',
-                    shop: '王小虎夫妻店',
-                    shopId: '10333'
-                },
-                {
-                    id: '12987126',
-                    name: '好滋好味鸡蛋仔',
-                    category: '江浙小吃、小吃零食',
-                    desc: '荷兰优质淡奶，奶香浓而不腻',
-                    address: '上海市普陀区真北路',
-                    shop: '王小虎夫妻店',
-                    shopId: '10333'
-                }
-            ],
+            tableData: [],
             currentPage4: 1,
             pageInfo: {
                 limit: 20,
@@ -134,37 +112,38 @@ export default {
             pageTotal: 0
         }
     },
-    mounted() {
+    mounted () {
         this.getUserData()
     },
     methods: {
-        getUserData() {
+        getUserData () {
             let page = Object.assign({}, this.pageInfo)
             getUserList(page).then(res => {
                 console.log(res)
                 this.pageTotal = res.data.total
                 this.tableData = res.data.userList
+                this.loading = false
             })
         },
-        handleSizeChange(limit) {
+        handleSizeChange (limit) {
             this.pageInfo.limit = limit
             this.getUserData()
         },
-        handleCurrentChange(page) {
+        handleCurrentChange (page) {
             this.pageInfo.page = page
             this.getUserData()
         },
-        editUser(row) {
+        editUser (row) {
             console.log({ ...row })
             this.dialogsTitle = '编辑'
             this.showAddUserDialog = true
             this.userData = { ...row }
         },
-        addUser() {
+        addUser () {
             this.dialogsTitle = '添加用户'
             this.showAddUserDialog = true
         },
-        removeUser(row) {
+        removeUser (row) {
             removeUserByID({ ...row }).then(res => {
                 this.$message.success('删除用户成功')
                 this.getUserData()

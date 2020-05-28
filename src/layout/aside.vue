@@ -36,7 +36,7 @@
                         <template slot="title">{{item.meta.title}}</template>
                         <router-link
                             v-for="(itemC, indexC) in item.children"
-                            :to="item.path+'/'+item.children[0].path"
+                            :to="item.path+'/'+item.children[indexC].path"
                             :key="indexC"
                         >
                             <el-menu-item

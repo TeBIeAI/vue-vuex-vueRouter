@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+        <% if(htmlWebpackPlugin.options.isProd){ %>
+        <link
+            rel="stylesheet"
+            href="https://cdn.bootcss.com/element-ui/2.11.1/theme-chalk/index.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css"
+        />
+
+        <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+        <script src="https://cdn.bootcss.com/vue-router/3.1.2/vue-router.min.js"></script>
+        <script src="https://cdn.bootcss.com/vuex/2.3.1/vuex.min.js"></script>
+        <script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+        <script src="https://cdn.bootcss.com/element-ui/2.11.1/index.js"></script>
+        <script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.min.js"></script>
+        <script src="//cdn.bootcss.com/Mock.js/1.0.1-beta3/mock-min.js"></script>
+        <script src="//cdn.bootcss.com/js-cookie/2.2.0/js.cookie.min.js"></script>
+        <% } %>
+
+        <title><%= htmlWebpackPlugin.options.title %></title>
+    </head>
+    <body>
+        <noscript>
+            <strong
+                >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't
+                work properly without JavaScript enabled. Please enable it to
+                continue.</strong
+            >
+        </noscript>
+        <div id="app"></div>
+        <!-- built files will be auto injected -->
+    </body>
 </html>

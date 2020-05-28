@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { Layout, content } from '../layout/index'
+import { topRouterMap } from './topRouter.js'
 
 Vue.use(VueRouter)
 
@@ -7,9 +9,18 @@ const Login = () => import('@/views/Login.vue')
 const Index = () => import('@/views/index/index.vue')
 const UserList = () => import('@/views/userList/userList.vue')
 const Computed = () => import('@/views/computed/computedList.vue')
-const Layout = () => import('@/layout/index.js')
+// const { Layout } = () => import('@/layout/index.js')
 const Error404 = () => import('@/views/errorPage/404.vue')
 const userList = () => import('@/views/userList/userList.vue')
+// const Infomation = () => import('@/views/infoManage/information')
+// const EditInfo = () => import('@/views/infoManage/editInfo')
+
+function filterTopRouterMap(name) {
+    let router = topRouterMap.filter(item => {
+        return item.parentName === name
+    })
+    return router[0].data
+}
 
 export const constantRouterMap = [
     {
@@ -87,12 +98,51 @@ export const constantRouterMap = [
                     title: '统计图'
                 },
                 component: Computed,
-                name: 'computed'
+                name: 'computedList'
+            }
+        ]
+    },
+    {
+        path: '/infoManage',
+        component: Layout,
+        meta: {
+            title: '信息管理'
+        },
+        name: 'infoManage',
+        children: [
+            {
+                path: 'infoShow',
+                meta: {
+                    title: '个人信息',
+                    titleList: [
+                        { path: 'infoShow1', title: '个人信息1' },
+                        { path: 'infoShow2', title: '个人信息2' },
+                        { path: 'infoShow3', title: '个人信息3' },
+                        { path: 'infoShow4', title: '个人信息4' }
+                    ]
+                },
+                component: content,
+                name: 'infoShow',
+                children: filterTopRouterMap('infoShow')
+            },
+            {
+                path: 'infoModify',
+                meta: {
+                    title: '修改信息',
+                    titleList: [
+                        { path: 'infoModify1', title: '修改信息子菜单1' },
+                        { path: 'infoModify2', title: '修改信息子菜单2' },
+                        { path: 'infoModify3', title: '修改信息子菜单3' }
+                    ]
+                },
+                component: content,
+                name: 'infoModify',
+                children: filterTopRouterMap('infoModify')
             }
         ]
     }
 ]
-console.log('index.js')
+
 const router = new VueRouter({
     routes: constantRouterMap
 })

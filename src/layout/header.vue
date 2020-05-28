@@ -2,7 +2,9 @@
     <div class="content_top">
         <el-row>
             <el-col :span="18">
-                <div class="grid-content bg-purple">1</div>
+                <div class="grid-content bg-purple">
+                    <top-menu></top-menu>
+                </div>
             </el-col>
             <el-col :span="6">
                 <div class="grid-content bg-purple-light">
@@ -23,9 +25,14 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import topMenu from './topMenu'
+
 export default {
     computed: {
         ...mapGetters(['name'])
+    },
+    components: {
+        topMenu
     },
     methods: {
         ...mapActions(['loginOut']),
