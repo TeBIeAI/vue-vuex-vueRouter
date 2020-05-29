@@ -30,6 +30,17 @@ export const removeStore = name => {
     window.localStorage.removeItem(name)
 }
 
+
+export const params = url => {
+    const search = url.split('?')[1]
+    if (!search) {
+        return {}
+    }
+
+
+    return search
+}
+
 export const param2Obj = url => {
     const search = url.split('?')[1]
     if (!search) {
@@ -37,10 +48,10 @@ export const param2Obj = url => {
     }
     return JSON.parse(
         '{"' +
-            decodeURIComponent(search)
-                .replace(/"/g, '\\"')
-                .replace(/&/g, '","')
-                .replace(/=/g, '":"') +
-            '"}'
+        decodeURIComponent(search)
+            .replace(/"/g, '\\"')
+            .replace(/&/g, '","')
+            .replace(/=/g, '":"') +
+        '"}'
     )
 }

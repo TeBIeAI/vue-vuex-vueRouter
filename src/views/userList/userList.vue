@@ -12,6 +12,7 @@
                 <el-col :span="7">
                     <el-button type="success" @click="getUserData">搜索</el-button>
                     <el-button type="success" @click="addUser">添加用户</el-button>
+                    <el-button type="success" @click="removeAll" :disabled="isDisabled">批量删除</el-button>
                 </el-col>
             </el-row>
         </el-card>
@@ -24,6 +25,9 @@
                 :data="tableData"
                 style="width: 100%"
                 stripe
+                ref="userTable"
+                @select="handleSelect"
+                @select-all="handleSelect"
             >
                 <el-table-column type="expand">
                     <template slot-scope="props">
@@ -52,15 +56,21 @@
                         </el-form>
                     </template>
                 </el-table-column>
-                <el-table-column label="USERNAME" prop="username"></el-table-column>
-                <el-table-column label="PRICE" prop="price">
+                <el-table-column type="selection" width="55"></el-table-column>
+                <el-table-column label="USERNAME" prop="username" sortable></el-table-column>
+                <el-table-column label="PRICE" prop="price" sortable>
                     <template slot-scope="scope">
                         <el-tag
                             :type="scope.row.price > 1000 ? 'success' : 'danger'"
                         >{{scope.row.price}}</el-tag>
                     </template>
                 </el-table-column>
-                <el-table-column label="DATE" prop="date"></el-table-column>
+                <el-table-column label="DATE" prop="date" sortable>
+                    <template slot-scope="scope">
+                        <i class="el-icon-time"></i>
+                        {{scope.row.date}}
+                    </template>
+                </el-table-column>
                 <el-table-column label="操作" prop>
                     <template slot-scope="scope">
                         <el-button @click="editUser(scope.row)" type="success" size="mini">编辑</el-button>
@@ -90,14 +100,15 @@
 </template>
 
 <script>
-import { getUserList, removeUserByID } from '@/api/user'
+import { getUserList, removeUserByID, removeManyUser } from '@/api/user'
 import AddUserDialog from './components/addUserDialog'
 export default {
     components: {
         AddUserDialog
     },
-    data () {
+    data() {
         return {
+            isDisabled: true,
             loading: true,
             showAddUserDialog: false,
             userData: null,
@@ -112,11 +123,11 @@ export default {
             pageTotal: 0
         }
     },
-    mounted () {
+    mounted() {
         this.getUserData()
     },
     methods: {
-        getUserData () {
+        getUserData() {
             let page = Object.assign({}, this.pageInfo)
             getUserList(page).then(res => {
                 console.log(res)
@@ -125,29 +136,39 @@ export default {
                 this.loading = false
             })
         },
-        handleSizeChange (limit) {
+        handleSizeChange(limit) {
             this.pageInfo.limit = limit
             this.getUserData()
         },
-        handleCurrentChange (page) {
+        handleCurrentChange(page) {
             this.pageInfo.page = page
             this.getUserData()
         },
-        editUser (row) {
+        editUser(row) {
             console.log({ ...row })
             this.dialogsTitle = '编辑'
             this.showAddUserDialog = true
             this.userData = { ...row }
         },
-        addUser () {
+        addUser() {
             this.dialogsTitle = '添加用户'
             this.showAddUserDialog = true
         },
-        removeUser (row) {
+        removeUser(row) {
             removeUserByID({ ...row }).then(res => {
                 this.$message.success('删除用户成功')
                 this.getUserData()
             })
+        },
+        removeAll() {
+            const data = this.$refs['userTable'].selection
+            removeManyUser(data)
+        },
+        handleSelect(selection, row) {
+            this.isDisabled = this.$refs['userTable'].selection.length
+                ? false
+                : true
+            console.log(selection, row)
         }
     }
 }

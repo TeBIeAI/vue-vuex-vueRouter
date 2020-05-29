@@ -74,6 +74,31 @@ export default {
         }
     },
 
+    //删除多个用户
+    removeAllUser: config => {
+        debugger
+        const param = mUtils.params(config.url)
+        const datas = JSON.parse(
+            '{"' +
+            decodeURIComponent(param)
+                .replace(/"/g, '\\"')
+                .replace(/&/g, '","')
+                .replace(/=/g, '":"') +
+            '"}'
+        )
+        // data = JSON.parse(data['0'])
+        datas.filter(res => {
+
+        })
+
+        return {
+            code: 200,
+            data: {
+                msg: '删除用户成功'
+            }
+        }
+    },
+
     // 修改用户信息
     updataUserInfo: config => {
         const { id, commentContent, date, price, status, userImg, username } = mUtils.param2Obj(config.url)

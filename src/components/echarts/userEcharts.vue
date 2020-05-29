@@ -7,7 +7,7 @@ import echarts from 'echarts'
 import echartsTheme from './theme/westeros.json'
 export default {
     name: 'userEcharts',
-    data () {
+    data() {
         return {
             options: {
                 title: {
@@ -123,13 +123,16 @@ export default {
             }
         }
     },
-    mounted () {
+    mounted() {
         this.initEcharts()
     },
     methods: {
-        initEcharts () {
+        initEcharts() {
             echarts.registerTheme('wonderland', echartsTheme)
-            let dom = echarts.init(document.getElementById('userEchart'), 'wonderland')
+            let dom = echarts.init(
+                document.getElementById('userEchart'),
+                'wonderland'
+            )
             dom.setOption(this.options)
         }
     }

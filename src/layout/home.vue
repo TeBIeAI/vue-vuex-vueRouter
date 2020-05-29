@@ -6,11 +6,13 @@
         <div class="container_right">
             <!-- 头部 -->
             <Header></Header>
-            <Bread />
-            <!-- 主体内容 -->
-            <router-view></router-view>
-            <!-- footer -->
-            <Footer></Footer>
+            <div class>
+                <Bread />
+                <!-- 主体内容 -->
+                <router-view></router-view>
+                <!-- footer -->
+                <Footer></Footer>
+            </div>
         </div>
     </div>
 </template>

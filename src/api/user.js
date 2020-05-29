@@ -48,6 +48,14 @@ export function removeUserByID (params) {
     })
 }
 
+export function removeManyUser (params) {
+    return request({
+        url: '/remove/manyUser',
+        method: 'get',
+        params: params
+    })
+}
+
 /**
  * 修改用户信息
  * @param {} params 

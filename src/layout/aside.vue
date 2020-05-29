@@ -36,7 +36,7 @@
                         <template slot="title">{{item.meta.title}}</template>
                         <router-link
                             v-for="(itemC, indexC) in item.children"
-                            :to="item.path+'/'+item.children[indexC].path"
+                            :to="childrenPath(item, itemC, indexC)"
                             :key="indexC"
                         >
                             <el-menu-item
@@ -58,9 +58,20 @@ export default {
     computed: {
         ...mapGetters(['permission_router'])
     },
-    data () {
+    data() {
         return {
             userImg: userImg
+        }
+    },
+    methods: {
+        childrenPath(item, itemC, indexC) {
+            return itemC.meta.titleList
+                ? item.path +
+                      '/' +
+                      item.children[indexC].path +
+                      '/' +
+                      itemC.meta.titleList[0].path
+                : item.path + '/' + item.children[indexC].path
         }
     }
 }
