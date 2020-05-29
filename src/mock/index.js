@@ -16,7 +16,7 @@ Mock.mock(/\/sales\/get/, 'get', salesAPI.getSalesList)
 Mock.mock(/\/user\/list\/get/, 'get', salesAPI.getUserList)
 Mock.mock(/\/remove\/user/, 'get', salesAPI.removeUser)
 
-Mock.mock(/\/remove\/manyUser/, 'get', salesAPI.removeAllUser)
+Mock.mock(/\/remove\/manyUser/, 'post', salesAPI.removeAllUser)
 Mock.mock(/\/edit\/userInofo/, 'get', salesAPI.updataUserInfo)
 Mock.mock(/\/add\/user/, 'get', salesAPI.createUser)
 

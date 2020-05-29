@@ -13,7 +13,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 export default {
-    data() {
+    data () {
         return {
             activeIndex: '1'
         }
@@ -21,22 +21,24 @@ export default {
     computed: {
         ...mapGetters(['topRouterMap'])
     },
-    created() {
+    created () {
         this.initTopMenu()
     },
     methods: {
         ...mapActions(['set_top_allRouter']),
-        initTopMenu() {
+        initTopMenu () {
             let listTitle = this.$route.matched[1].meta.titleList
             this.set_top_allRouter(listTitle)
         },
-        currentPath() {
+        currentPath () {
             this.initTopMenu()
         },
-        handleSelect() {}
+        handleSelect () {
+
+        }
     },
     watch: {
-        $route: 'currentPath'
+        "$route": "currentPath"
     }
 }
 </script>
@@ -47,6 +49,5 @@ export default {
 }
 .el-menu-demo.flex {
     border-bottom: none;
-    height: 1px;
 }
 </style>

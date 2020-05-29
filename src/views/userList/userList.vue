@@ -106,7 +106,7 @@ export default {
     components: {
         AddUserDialog
     },
-    data() {
+    data () {
         return {
             isDisabled: true,
             loading: true,
@@ -123,11 +123,11 @@ export default {
             pageTotal: 0
         }
     },
-    mounted() {
+    mounted () {
         this.getUserData()
     },
     methods: {
-        getUserData() {
+        getUserData () {
             let page = Object.assign({}, this.pageInfo)
             getUserList(page).then(res => {
                 console.log(res)
@@ -136,35 +136,42 @@ export default {
                 this.loading = false
             })
         },
-        handleSizeChange(limit) {
+        handleSizeChange (limit) {
             this.pageInfo.limit = limit
             this.getUserData()
         },
-        handleCurrentChange(page) {
+        handleCurrentChange (page) {
             this.pageInfo.page = page
             this.getUserData()
         },
-        editUser(row) {
+        editUser (row) {
             console.log({ ...row })
             this.dialogsTitle = '编辑'
             this.showAddUserDialog = true
             this.userData = { ...row }
         },
-        addUser() {
+        addUser () {
             this.dialogsTitle = '添加用户'
             this.showAddUserDialog = true
         },
-        removeUser(row) {
+        removeUser (row) {
             removeUserByID({ ...row }).then(res => {
                 this.$message.success('删除用户成功')
                 this.getUserData()
             })
         },
-        removeAll() {
+        removeAll () {
             const data = this.$refs['userTable'].selection
-            removeManyUser(data)
+            const dataArr = []
+            data.filter(item => {
+                dataArr.push(item.id)
+            })
+            removeManyUser({ body: data }).then(res => {
+                this.$message.success('删除用户成功')
+                this.getUserData()
+            })
         },
-        handleSelect(selection, row) {
+        handleSelect (selection, row) {
             this.isDisabled = this.$refs['userTable'].selection.length
                 ? false
                 : true
