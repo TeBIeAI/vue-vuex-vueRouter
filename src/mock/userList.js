@@ -13,6 +13,7 @@ for (let i = 0; i < count; i++) {
             username: Mock.Random.name(),
             date: Mock.Random.datetime(),
             price: Mock.Random.float(0, 9999, 2, 2),
+            progress: Mock.Random.float(0, 100, 0, 0),
             status: Mock.Random.natural(1, 4),
             commentContent: Mock.Random.paragraph()
         })

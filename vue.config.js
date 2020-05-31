@@ -34,5 +34,11 @@ module.exports = {
                 'js-cookie': 'Cookies'
             }
         }
+        config.externals = {
+            BMap: 'BMap'
+        }
+    },
+    devServer: {
+        https: true
     }
 }

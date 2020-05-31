@@ -12,6 +12,8 @@ const Computed = () => import('@/views/computed/computedList.vue')
 // const { Layout } = () => import('@/layout/index.js')
 const Error404 = () => import('@/views/errorPage/404.vue')
 const userList = () => import('@/views/userList/userList.vue')
+const Bmap = () => import('@/views/map/bmap.vue')
+const Amap = () => import('@/views/map/amap.vue')
 // const Infomation = () => import('@/views/infoManage/information')
 // const EditInfo = () => import('@/views/infoManage/editInfo')
 
@@ -40,6 +42,32 @@ export const constantRouterMap = [
             {
                 path: 'index',
                 component: Index
+            }
+        ]
+    },
+    {
+        path: '/map',
+        name: 'map',
+        meta: {
+            title: '地图控件'
+        },
+        component: Layout,
+        children: [
+            {
+                path: 'bmap',
+                meta: {
+                    title: '百度地图'
+                },
+                component: Bmap,
+                name: 'bmap'
+            },
+            {
+                path: 'amap',
+                meta: {
+                    title: '高德地图'
+                },
+                component: Amap,
+                name: 'amap'
             }
         ]
     },

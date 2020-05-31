@@ -65,6 +65,16 @@
                         >{{scope.row.price}}</el-tag>
                     </template>
                 </el-table-column>
+                <el-table-column label="PROGRESS" prop="progress">
+                    <template slot-scope="scope">
+                        <el-progress
+                            :text-inside="true"
+                            :stroke-width="16"
+                            :percentage="scope.row.progress"
+                            :status="statusPro(scope.row.progress)"
+                        ></el-progress>
+                    </template>
+                </el-table-column>
                 <el-table-column label="DATE" prop="date" sortable>
                     <template slot-scope="scope">
                         <i class="el-icon-time"></i>
@@ -130,7 +140,6 @@ export default {
         getUserData () {
             let page = Object.assign({}, this.pageInfo)
             getUserList(page).then(res => {
-                console.log(res)
                 this.pageTotal = res.data.total
                 this.tableData = res.data.userList
                 this.loading = false
@@ -176,6 +185,23 @@ export default {
                 ? false
                 : true
             console.log(selection, row)
+        },
+        statusPro (data) {
+
+            let status = ''
+            if (data == 100) {
+                status = 'success'
+            } else if (data >= 80 && data < 100) {
+                status = 'success'
+            } else if (data >= 50 && data < 80) {
+                status = 'warning'
+            } else {
+                status = 'exception'
+            }
+            return status
+        },
+        changeProgress (data) {
+
         }
     }
 }
