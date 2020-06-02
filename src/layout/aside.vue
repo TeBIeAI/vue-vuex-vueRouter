@@ -23,7 +23,7 @@
                     >
                         <el-menu-item :index="index.toString()">
                             <i class="el-icon-setting"></i>
-                            <span slot="title">{{ item.meta.title }}</span>
+                            <span slot="title">{{ $t(`commons.${item.name}`) }}</span>
                         </el-menu-item>
                     </router-link>
 
@@ -33,7 +33,7 @@
                         v-if="item.meta && item.children && !item.noDropdown && item.children.length > 0"
                         :key="index"
                     >
-                        <template slot="title">{{item.meta.title}}</template>
+                        <template slot="title">{{$t(`commons.${item.name}`)}}</template>
                         <router-link
                             v-for="(itemC, indexC) in item.children"
                             :to="childrenPath(item, itemC, indexC)"
@@ -42,7 +42,11 @@
                             <el-menu-item
                                 v-if="itemC.meta && itemC.meta.title"
                                 :index="index.toString()+indexC"
-                            >{{itemC.meta.title}}</el-menu-item>
+                            >
+                                {{
+                                $t(`commons.${itemC.name}`)
+                                }}
+                            </el-menu-item>
                         </router-link>
                     </el-submenu>
                 </template>

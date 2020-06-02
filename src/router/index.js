@@ -17,7 +17,7 @@ const Amap = () => import('@/views/map/amap.vue')
 // const Infomation = () => import('@/views/infoManage/information')
 // const EditInfo = () => import('@/views/infoManage/editInfo')
 
-function filterTopRouterMap(name) {
+function filterTopRouterMap (name) {
     let router = topRouterMap.filter(item => {
         return item.parentName === name
     })
@@ -81,6 +81,7 @@ export const constantRouterMap = [
         meta: {
             title: '404页面'
         },
+        name: 'error404',
         component: Layout,
         noDropdown: true,
         children: [

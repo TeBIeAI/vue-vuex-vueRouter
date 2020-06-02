@@ -37,8 +37,5 @@ module.exports = {
         config.externals = {
             BMap: 'BMap'
         }
-    },
-    devServer: {
-        https: true
     }
 }

@@ -10,11 +10,16 @@
                 <div class="grid-content bg-purple-light">
                     <!-- 右侧登出 -->
                     <el-menu class="el-menu-demo" mode="horizontal">
-                        <el-submenu index="2">
+                        <el-submenu index="1">
                             <template slot="title">hi：{{name}}</template>
-                            <el-menu-item index="2-1">infoShow</el-menu-item>
-                            <el-menu-item index="2-2">infoMidy</el-menu-item>
-                            <el-menu-item @click="selectHandle('loginOut')" index="2-3">login Out</el-menu-item>
+                            <el-menu-item index="1-1">infoShow</el-menu-item>
+                            <el-menu-item index="1-2">infoMidy</el-menu-item>
+                            <el-menu-item @click="selectHandle('loginOut')" index="1-3">login Out</el-menu-item>
+                        </el-submenu>
+                        <el-submenu index="2">
+                            <template slot="title">我的工作台</template>
+                            <el-menu-item index="2-1" @click="changeLocale('zh')">中文</el-menu-item>
+                            <el-menu-item index="2-2" @click="changeLocale('en')">EngList</el-menu-item>
                         </el-submenu>
                     </el-menu>
                 </div>
@@ -26,6 +31,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import topMenu from './topMenu'
+import { setToken } from '@/utils/auth.js'
 
 export default {
     computed: {
@@ -36,17 +42,19 @@ export default {
     },
     methods: {
         ...mapActions(['loginOut']),
-        logOut () {
+        logOut() {
             this.loginOut().then(res => {
                 window.location.reload()
             })
         },
-        selectHandle (handleType) {
+        selectHandle(handleType) {
             switch (handleType) {
                 case 'loginOut':
                     this.logOut()
             }
-
+        },
+        changeLocale(lang) {
+            setToken('lang', lang)
         }
     }
 }

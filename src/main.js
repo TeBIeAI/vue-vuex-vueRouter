@@ -8,11 +8,15 @@ import('element-ui/lib/theme-chalk/index.css')
 import '@/mock'
 import '@/permission.js'
 
+// i18n国际化
+import i18n from '@/lang'
+
 Vue.config.productionTip = false
 Vue.use(elementUI)
 
 new Vue({
     router,
     store,
+    i18n,
     render: h => h(App)
 }).$mount('#app')
