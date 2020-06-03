@@ -17,7 +17,7 @@
                             <el-menu-item @click="selectHandle('loginOut')" index="1-3">login Out</el-menu-item>
                         </el-submenu>
                         <el-submenu index="2">
-                            <template slot="title">我的工作台</template>
+                            <template slot="title">i18n</template>
                             <el-menu-item index="2-1" @click="changeLocale('zh')">中文</el-menu-item>
                             <el-menu-item index="2-2" @click="changeLocale('en')">EngList</el-menu-item>
                         </el-submenu>
@@ -55,6 +55,7 @@ export default {
         },
         changeLocale(lang) {
             setToken('lang', lang)
+            this.$i18n.locale = lang
         }
     }
 }
