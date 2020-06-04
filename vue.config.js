@@ -11,9 +11,10 @@ module.exports = {
     filenameHashing: true, // false 来关闭文件名哈希
     lintOnSave: false, // 关闭eslint
     // 打包时不生成.map文件
+    // 你数
     productionSourceMap: false,
     chainWebpack: config => {
-        config.entry.app = ['./src/main.js']
+        config.entry.app  = ['./src/main.js']
         config.resolve.alias
             .set('@', resolve('src'))
             .set('cpt', resolve('src/components'))
