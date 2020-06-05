@@ -90,7 +90,8 @@ var constantRouterMap = [{
   path: '/index',
   name: 'index',
   meta: {
-    title: '首页'
+    title: '首页',
+    icon: 'home'
   },
   noDropdown: true,
   component: _index.Layout,
@@ -102,7 +103,8 @@ var constantRouterMap = [{
   path: '/map',
   name: 'map',
   meta: {
-    title: '地图控件'
+    title: '地图控件',
+    icon: 'map'
   },
   component: _index.Layout,
   children: [{
@@ -127,7 +129,8 @@ var constantRouterMap = [{
 }, {
   path: '/404',
   meta: {
-    title: '404页面'
+    title: '404页面',
+    icon: '404'
   },
   name: 'error404',
   component: _index.Layout,
@@ -144,7 +147,8 @@ var constantRouterMap = [{
   path: '/userManager',
   component: _index.Layout,
   meta: {
-    title: '用户管理'
+    title: '用户管理',
+    icon: 'user'
   },
   name: 'userManager',
   children: [{
@@ -159,7 +163,8 @@ var constantRouterMap = [{
   path: '/computed',
   component: _index.Layout,
   meta: {
-    title: '数据统计'
+    title: '数据统计',
+    icon: 'computed'
   },
   name: 'computed',
   children: [{
@@ -174,7 +179,8 @@ var constantRouterMap = [{
   path: '/infoManage',
   component: _index.Layout,
   meta: {
-    title: '信息管理'
+    title: '信息管理',
+    icon: 'userInfo'
   },
   name: 'infoManage',
   children: [{

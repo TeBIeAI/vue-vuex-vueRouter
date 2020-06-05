@@ -7,6 +7,7 @@ import Message from 'element-ui'
 import('element-ui/lib/theme-chalk/index.css')
 import '@/mock'
 import '@/permission.js'
+import './assets/icons'
 
 // i18n国际化
 import i18n from '@/lang'

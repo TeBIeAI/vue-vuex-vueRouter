@@ -1,5 +1,7 @@
 import router from './router'
 import store from './store'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import { Message } from 'element-ui'
 import { getToken } from '@/utils/auth'
 import { getUserInfo } from '@/api/user'
@@ -9,12 +11,14 @@ const whiteList = ['/login']
 
 router.beforeEach((to, from, next) => {
     const hasToken = getToken('token')
-
+    NProgress.start()
     if (hasToken) {
+
         //如果用户存在令牌的情况请求登录页面，就让用户直接跳转到首页，避免存在重复登录的情况
         if (to.path === '/login') {
             // 直接跳转到首页，当然取决于你的路由重定向到哪里
             next({ path: '/' })
+            NProgress.done()
         } else {
             //如果已经有令牌的用户请求的不是登录页，是其他页面
             //就从Vuex里拿到用户的信息，这里也证明用户不是第一次登录了
@@ -53,8 +57,11 @@ router.beforeEach((to, from, next) => {
             next()
         } else {
             next('/login')
+            Nprogress.done()
         }
     }
 })
 
-router.afterEach(() => {})
+router.afterEach(() => {
+    NProgress.done() // 结束Progress
+})

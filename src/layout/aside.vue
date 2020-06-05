@@ -22,7 +22,7 @@
                         :key="index"
                     >
                         <el-menu-item :index="index.toString()">
-                            <i class="el-icon-setting"></i>
+                            <svg-icon :iconClass="item.meta.icon" class="icon iconright"></svg-icon>
                             <span slot="title">{{ $t(`commons.${item.name}`) }}</span>
                         </el-menu-item>
                     </router-link>
@@ -33,7 +33,10 @@
                         v-if="item.meta && item.children && !item.noDropdown && item.children.length > 0"
                         :key="index"
                     >
-                        <template slot="title">{{$t(`commons.${item.name}`)}}</template>
+                        <template slot="title">
+                            <svg-icon :iconClass="item.meta.icon" class="icon iconright"></svg-icon>
+                            {{$t(`commons.${item.name}`)}}
+                        </template>
                         <router-link
                             v-for="(itemC, indexC) in item.children"
                             :to="childrenPath(item, itemC, indexC)"
@@ -92,6 +95,25 @@ export default {
     .names {
         color: #ff6c60;
         font-size: 24px;
+    }
+}
+.iconright {
+    margin-right: 6px;
+}
+
+.el-menu-item.is-active {
+    .svg-icon {
+        fill: red;
+    }
+}
+.el-submenu__title:hover {
+    .svg-icon {
+        fill: red;
+    }
+}
+.el-menu-item:hover {
+    .svg-icon {
+        fill: red;
     }
 }
 </style>

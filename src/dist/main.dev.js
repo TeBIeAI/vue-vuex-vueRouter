@@ -14,6 +14,8 @@ require("@/mock");
 
 require("@/permission.js");
 
+require("./assets/icons");
+
 var _lang = _interopRequireDefault(require("@/lang"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
